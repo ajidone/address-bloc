@@ -52,13 +52,33 @@ RSpec.describe AddressBook do
     it "imports the correct number of entries" do
       book.import_from_csv("entries.csv")
       book_size = book.entries.size
-      expect(book_size).to eq 5
+      expect(book_size).to eq(5)
     end
 
     it "imports the first entry" do
       book.import_from_csv("entries.csv")
       entry_one = book.entries[0]
       check_entry(entry_one, "Bill", "555-555-4854", "bill@blocmail.com")
+    end
+
+    it "imports entries from an additional CSV file" do
+      book.import_from_csv("entries.csv")
+      book_size_pre = book.entries.size
+      book.import_from_csv("entries2.csv")
+      expect(book.entries.size).to eq(book_size_pre + 3)
+    end
+
+    it "imports the first entry of second file" do
+      book.import_from_csv("entries.csv")
+      book.import_from_csv("entries2.csv")
+
+      index = 0
+      book.entries.each do |entry|
+        break if "Adam" == entry.name && "999-777-6666" == entry.phone_number && "Adam@blocmail.com" == entry.email
+        index+=1
+      end
+
+      check_entry(book.entries[index], "Adam", "999-777-6666", "Adam@blocmail.com")
     end
   end
 end
