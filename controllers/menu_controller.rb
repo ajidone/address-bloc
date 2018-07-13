@@ -14,7 +14,8 @@ class MenuController
     puts "3 - Search for an entry"
     puts "4 - Import entries from a CSV"
     puts "5 - View Entry Number n"
-    puts "6 - Exit"
+    puts "6 - Set fire to address book"
+    puts "7 - Exit"
     print "Enter your selection: "
 
     selection = gets.to_i
@@ -41,6 +42,10 @@ class MenuController
        view_entry_number
        main_menu
      when 6
+       system "clear"
+       set_fire
+       main_menu
+     when 7
        puts "Good-bye!"
        exit(0)
      else
@@ -146,6 +151,20 @@ class MenuController
       puts "#{file_name} is not a valid CSV file, please enter the name of a valid CSV file"
       read_csv
     end
+  end
+
+  def set_fire
+    system "clear"
+    address_book.set_fire
+    puts "               (  .      )"
+    puts "       )           (              )"
+    puts "             .  '   .   '  .  '  ."
+    puts "    (    , )       (.   )  (   ',    )"
+    puts "     .' ) ( . )    ,  ( ,     )   ( ."
+    puts "  ). , ( .   (  ) ( , ')  .' (  ,    )"
+    puts " (_,) . ), ) _) _,')  (, ) '. )  ,. (' )"
+    puts "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+    puts "Address book in flames"
   end
 
   def entry_submenu(entry)

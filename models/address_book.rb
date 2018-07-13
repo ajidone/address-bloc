@@ -67,4 +67,8 @@ class AddressBook
 
     return nil
   end
+
+  def set_fire
+    entries.clear
+  end
 end
