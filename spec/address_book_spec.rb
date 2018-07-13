@@ -179,4 +179,13 @@ RSpec.describe AddressBook do
        expect(entry).to be_nil
      end
   end
+
+  describe "#set_fire" do
+    it "clears all entries from the address book" do
+    book.import_from_csv("entries.csv")
+    book.set_fire
+    
+    expect(book.entries.size).to eq(0)
+    end
+  end
 end
